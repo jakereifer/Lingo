@@ -13,7 +13,7 @@
     "ms-vscode.vscode-typescript-next",
     "GitHub.copilot" // Added GitHub Copilot extension
   ],
-  "postCreateCommand": "dotnet --version && npm --version",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y openssh-client && dotnet --version && npm --version",
   "forwardPorts": [3000, 5000],
   "remoteUser": "vscode"
 }
