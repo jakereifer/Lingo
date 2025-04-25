@@ -11,9 +11,10 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "ms-vscode.vscode-typescript-next",
-    "GitHub.copilot" // Added GitHub Copilot extension
+    "GitHub.copilot", // Added GitHub Copilot extension
+    "ms-dotnettools.csdevkit" // Added C# Dev Kit extension
   ],
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y openssh-client && mkdir -p ~/.ssh && ssh-keyscan -H github.com >> ~/.ssh/known_hosts && dotnet --version && npm --version"
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y openssh-client && mkdir -p ~/.ssh && ssh-keyscan -H github.com >> ~/.ssh/known_hosts && dotnet --version && npm --version",
   "forwardPorts": [3000, 5000],
   "remoteUser": "vscode"
 }
