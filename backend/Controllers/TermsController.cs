@@ -87,12 +87,17 @@ namespace backend.Controllers
                 return BadRequest("Both English and Translation fields are required.");
             }
 
+            if (termDto.CategoryIDs.Any(cId => !_categoryService.Categories.Any(c => c.ID == cId)))
+            {
+                return BadRequest("One or more CategoryIDs are invalid. The referenced categories do not exist.");
+            }
+
             term.English = termDto.English;
             term.Translation = termDto.Translation;
             term.Notes = termDto.Notes;
             term.CategoryIDs = termDto.CategoryIDs;
-            term.UpdatedDateTime = DateTime.UtcNow;
             term.Flag = termDto.Flag;
+            term.UpdatedDateTime = DateTime.UtcNow;
 
             return NoContent();
         }
@@ -108,6 +113,32 @@ namespace backend.Controllers
 
             _termService.Terms.Remove(term);
             return NoContent();
+        }
+
+        [HttpGet("filter")]
+        public ActionResult<IEnumerable<Term>> FilterTerms([FromQuery] Guid? categoryId, [FromQuery] bool? flag, [FromQuery] string? sortBy)
+        {
+            var terms = _termService.Terms.AsEnumerable();
+
+            if (categoryId.HasValue)
+            {
+                terms = terms.Where(t => t.CategoryIDs.Contains(categoryId.Value));
+            }
+
+            if (flag.HasValue)
+            {
+                terms = terms.Where(t => t.Flag == flag.Value);
+            }
+
+            terms = sortBy?.ToLower() switch
+            {
+                "creation" => terms.OrderBy(t => t.CreationDateTime),
+                "update" => terms.OrderBy(t => t.UpdatedDateTime),
+                "performance" => terms.OrderByDescending(t => t.TestCorrectCount / (double)(t.TestAttemptCount == 0 ? 1 : t.TestAttemptCount)),
+                _ => terms
+            };
+
+            return Ok(terms);
         }
     }
 }
