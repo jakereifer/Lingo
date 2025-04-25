@@ -32,7 +32,7 @@ namespace Lingo.Controllers
         [HttpPost]
         public ActionResult<Language> AddLanguage(LanguageDTO languageDto)
         {
-            if (string.IsNullOrWhiteSpace(languageDto.LanguageName))
+            if (string.IsNullOrWhiteSpace(languageDto.Name))
             {
                 return BadRequest("Language name is required.");
             }
@@ -40,7 +40,7 @@ namespace Lingo.Controllers
             var language = new Language
             {
                 ID = Guid.NewGuid(),
-                LanguageName = languageDto.LanguageName
+                Name = languageDto.Name
             };
 
             Languages.Add(language);
@@ -56,12 +56,12 @@ namespace Lingo.Controllers
                 return NotFound();
             }
 
-            if (string.IsNullOrWhiteSpace(languageDto.LanguageName))
+            if (string.IsNullOrWhiteSpace(languageDto.Name))
             {
                 return BadRequest("Language name is required.");
             }
 
-            language.LanguageName = languageDto.LanguageName;
+            language.Name = languageDto.Name;
             return NoContent();
         }
 

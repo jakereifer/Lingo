@@ -2,6 +2,6 @@ namespace Lingo.Models
 {
     public class LanguageDTO
     {
-        public required string LanguageName { get; set; } // Required
+        public required string Name { get; set; } // Required
     }
 }
