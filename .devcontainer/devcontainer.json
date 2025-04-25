@@ -1,0 +1,19 @@
+{
+  "name": "Dotnet and React Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash"
+  },
+  "extensions": [
+    "ms-dotnettools.csharp",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next",
+    "GitHub.copilot" // Added GitHub Copilot extension
+  ],
+  "postCreateCommand": "dotnet --version && npm --version",
+  "forwardPorts": [3000, 5000],
+  "remoteUser": "vscode"
+}
