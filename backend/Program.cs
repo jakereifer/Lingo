@@ -1,3 +1,4 @@
+using backend.Services;
 using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,10 @@ builder.Services.AddOpenTelemetry().WithTracing(builder =>
     builder.AddAspNetCoreInstrumentation()
            .AddConsoleExporter();
 });
+
+builder.Services.AddSingleton<LanguageService>();
+builder.Services.AddSingleton<CategoryService>();
+builder.Services.AddSingleton<TermService>();
 
 var app = builder.Build();
 

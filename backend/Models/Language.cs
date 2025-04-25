@@ -5,7 +5,7 @@ namespace Lingo.Models
     public class Language
     {
         public required Guid ID { get; set; } // Primary key
-        public string Name { get; set; } // Required
+        public required string Name { get; set; } // Required
 
     }
 }
